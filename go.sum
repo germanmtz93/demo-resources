@@ -1,1 +1,2 @@
-# This file will be auto-generated when you run go mod tidy
+# This file will be generated automatically when you run 'go mod tidy'
+# For now, we'll create an empty file to avoid errors

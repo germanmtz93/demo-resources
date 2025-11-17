@@ -1,19 +1,23 @@
 FROM golang:1.21-alpine AS builder
 
+# Install git and certificates for downloads
+RUN apk add --no-cache git ca-certificates
+
 WORKDIR /app
 
 # Copy go mod and sum files
 COPY go.mod go.sum ./
 
-# Download dependencies
-RUN go mod download
+# Download dependencies with retry logic
+RUN go env -w GOPROXY=direct && \
+    for i in $(seq 1 3); do go mod download && break || sleep 5; done
 
 # Copy source code
 COPY . .
 
 # Generate Swagger docs
-RUN go install github.com/swaggo/swag/cmd/swag@latest
-RUN swag init
+RUN go install github.com/swaggo/swag/cmd/swag@latest && \
+    swag init
 
 # Build the application
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o api .
