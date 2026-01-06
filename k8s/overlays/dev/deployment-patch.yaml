@@ -1,0 +1,16 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-api
+  template:
+    spec:
+      containers:
+      - name: demo-api
+        env:
+        - name: GO_ENV
+          value: "development"
