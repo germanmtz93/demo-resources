@@ -10,7 +10,7 @@ docker build -t demo-api:latest .
 
 # Load image into OrbStack (if using local registry)
 echo "📤 Loading image to OrbStack..."
-docker save demo-api:latest | orb load
+docker save demo-api:latest | docker load
 
 # Apply ArgoCD application
 echo "🔄 Creating ArgoCD application..."
