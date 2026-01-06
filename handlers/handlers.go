@@ -2,46 +2,31 @@ package handlers
 
 import (
 	"net/http"
-	"os"
 
 	"github.com/gin-gonic/gin"
 )
 
-// HealthResponse represents the health check response
-type HealthResponse struct {
-	Status string `json:"status"`
-}
-
-// HostnameResponse represents the hostname response
-type HostnameResponse struct {
-	Hostname string `json:"hostname"`
-}
-
-// GetHostname returns the hostname of the machine
-// @Summary Get hostname
-// @Description Returns the hostname of the machine the API is running on
-// @Produce json
-// @Success 200 {object} HostnameResponse
-// @Router / [get]
-func GetHostname(c *gin.Context) {
-	hostname, err := os.Hostname()
-	if err != nil {
-		hostname = "unknown"
-	}
-	
-	c.JSON(http.StatusOK, HostnameResponse{
-		Hostname: hostname,
+// Welcome returns demo API welcome message
+func Welcome(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Welcome to Demo API",
+		"version": "1.0.0",
 	})
 }
 
-// HealthCheck returns the API health status
-// @Summary Health check
-// @Description Returns the health status of the API
-// @Produce json
-// @Success 200 {object} HealthResponse
-// @Router /health [get]
+// HealthCheck returns API health status
 func HealthCheck(c *gin.Context) {
-	c.JSON(http.StatusOK, HealthResponse{
-		Status: "ok",
+	c.JSON(http.StatusOK, gin.H{
+		"status": "healthy",
+		"service": "demo-api",
+	})
+}
+
+// GetDocs returns dummy documentation data
+func GetDocs(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{
+		"api": "Demo API",
+		"endpoints": []string{"/", "/health", "/docs"},
+		"description": "Simple demo API for ArgoCD deployment",
 	})
 }

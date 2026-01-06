@@ -1,21 +1,19 @@
-# Go API Template
+# Go Demo API
 
-A standard template for creating REST APIs in Go.
+A minimal REST API in Go for ArgoCD deployment demonstrations.
 
 ## Features
 
-- Standard REST API structure
+- Simple REST API with 3 endpoints
 - Environment management with .env files
-- API documentation with Swagger
 - Docker support
 - CI/CD with GitHub Actions
-- Test setup
 
 ## Endpoints
 
-- `/` - Returns the hostname of the machine
-- `/health` - Returns the API health status
-- `/swagger/*any` - API documentation
+- `/` - Returns welcome message for demo API
+- `/health` - Returns API health status
+- `/docs` - Returns dummy documentation data
 
 ## Getting Started
 
@@ -34,7 +32,7 @@ cd go-api-template
 
 2. Install dependencies
 ```bash
-go mod download
+go mod tidy
 ```
 
 3. Create a .env file
@@ -42,13 +40,7 @@ go mod download
 cp .env.example .env
 ```
 
-4. Generate Swagger documentation
-```bash
-go install github.com/swaggo/swag/cmd/swag@latest
-swag init
-```
-
-5. Run the application
+4. Run the application
 ```bash
 go run main.go
 ```
@@ -57,42 +49,23 @@ go run main.go
 
 Build the Docker image:
 ```bash
-docker build -t go-api-template .
+docker build -t demo-api .
 ```
 
-Run the container with environment variables:
+Run the container:
 ```bash
-docker run -p 8080:8080 --env-file .env go-api-template
+docker run -p 8080:8080 demo-api
 ```
 
 ## Testing
 
-Run tests:
+Test the endpoints:
 ```bash
-go test -v ./...
+curl http://localhost:8080/
+curl http://localhost:8080/health
+curl http://localhost:8080/docs
 ```
 
-## CI/CD
+## ArgoCD Deployment
 
-The repository includes GitHub Actions workflows for:
-- Running tests
-- Building and pushing Docker images to Docker Hub
-
-Required secrets:
-- `DOCKERHUB_USERNAME`
-- `DOCKERHUB_TOKEN`
-
-### Reusing the workflow
-
-This workflow can be reused in other repositories by calling it with a custom service name:
-
-```yaml
-jobs:
-  build:
-    uses: organization/go-api-template/.github/workflows/ci-cd.yml@main
-    with:
-      service_name: my-custom-service
-    secrets:
-      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-```
+This API is designed for demonstration purposes with ArgoCD running on OrbStack.
