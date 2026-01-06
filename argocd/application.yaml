@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/organization/go-api-template.git
+    repoURL: git@github.com:savannahportorg/go-api-template.git
     targetRevision: dev
     path: k8s/overlays/dev
   destination:

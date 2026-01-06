@@ -10,23 +10,23 @@ import (
 func Welcome(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Welcome to Demo API",
-		"version": "1.0.0",
+		"version": "2.0.0",
 	})
 }
 
 // HealthCheck returns API health status
 func HealthCheck(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
-		"status": "healthy",
-		"service": "demo-api",
+		"status":  "healthy",
+		"service": "demo-api v2",
 	})
 }
 
 // GetDocs returns dummy documentation data
 func GetDocs(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
-		"api": "Demo API",
-		"endpoints": []string{"/", "/health", "/docs"},
+		"api":         "Demo API",
+		"endpoints":   []string{"/", "/health", "/docs"},
 		"description": "Simple demo API for ArgoCD deployment",
 	})
 }
