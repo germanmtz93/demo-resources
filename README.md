@@ -1,4 +1,4 @@
-# Go Demo API
+# Go Demo API _test
 
 A minimal REST API in Go for ArgoCD deployment demonstrations.
 
