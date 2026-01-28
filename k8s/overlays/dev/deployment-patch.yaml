@@ -10,7 +10,8 @@ spec:
   template:
     spec:
       containers:
-      - name: "techsalad/csg-onboarding"
+      - name: demo-api
+        image: techsalad/csg-onboarding:latest
         env:
         - name: GO_ENV
           value: "development"
