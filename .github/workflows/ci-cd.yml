@@ -7,11 +7,11 @@ on:
         description: 'Name of the service/image'
         required: true
         type: string
-        default: 'go-api-template'
+        default: 'csg-onboarding'
   push:
-    branches: [ main ]
+    branches: [ dev ]
   pull_request:
-    branches: [ main ]
+    branches: [ dev ]
 
 jobs:
   build-and-push:
