@@ -12,4 +12,4 @@ data:
     p, role:read-only-role, projects, get, *, allow
     p, role:read-only-role, logs, get, *, allow
 
-    g, olademo, role:read-only-role
+    g, demouser, role:read-only-role

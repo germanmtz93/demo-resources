@@ -11,19 +11,17 @@ RUN go mod download
 # Copy source code
 COPY . .
 
-# Build the application
-RUN CGO_ENABLED=0 GOOS=linux go build -o api .
+# Build the application with optimizations
+RUN CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static" -s -w' -o api .
 
-# Create minimal image
-FROM alpine:latest
-
-WORKDIR /app
+# Create minimal image using scratch
+FROM scratch
 
 # Copy the binary from builder
-COPY --from=builder /app/api .
+COPY --from=builder /app/api /api
 
 # Expose port
 EXPOSE 3000
 
 # Run the application
-CMD ["./api"]
+CMD ["/api"]
