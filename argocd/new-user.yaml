@@ -12,4 +12,4 @@ data:
   #   login - allows to login using UI
   accounts.olademo: apiKey, login
   # disables user. User is enabled by default
-  accounts.olademo.enabled: "false"
+  #accounts.olademo.enabled: "false"

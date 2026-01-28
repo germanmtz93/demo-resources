@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-rbac-cm
+  namespace: argocd
+data:
+  policy.default: role:readonly
+  policy.csv: |
+    p, role:read-only-role, applications, *, */*, allow
+    p, role:read-only-role, clusters, get, *, allow
+    p, role:read-only-role, repositories, get, *, allow
+    p, role:read-only-role, projects, get, *, allow
+    p, role:read-only-role, logs, get, *, allow
+
+    g, olademo, role:read-only-role
