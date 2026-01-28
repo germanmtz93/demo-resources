@@ -31,18 +31,13 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Generate Swagger docs
-        run: |
-          go install github.com/swaggo/swag/cmd/swag@latest
-          swag init
-
       - name: Get service name
         id: service
         run: |
           if [ "${{ github.event_name }}" == "workflow_call" ]; then
             echo "name=${{ inputs.service_name }}" >> $GITHUB_OUTPUT
           else
-            echo "name=go-api-template" >> $GITHUB_OUTPUT
+            echo "name=csg-onboarding" >> $GITHUB_OUTPUT
           fi
 
       - name: Build and push
