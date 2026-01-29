@@ -1,0 +1,23 @@
+port:
+  clientId: ""
+  clientSecret: ""
+  # Use https://api.getport.io for EU (app.port.io)
+  # Use https://api.us.getport.io for US (app.us.port.io)
+  baseUrl: "https://api.getport.io"
+
+initializePortResources: true
+sendRawDataExamples: true
+scheduledResyncInterval: 360
+
+integration:
+  identifier: "demo-csg-integration"
+  type: "argocd"
+  eventListener:
+    type: "POLLING"
+  config:
+    # Your Argo CD API server URL, e.g. https://argocd-server.argocd.svc.cluster.local
+    serverUrl: "https://argocd-server.argocd.svc.cluster.local"
+    allowInsecure: true
+  secrets:
+    # Argo CD API token with read permissions
+    token: ""
